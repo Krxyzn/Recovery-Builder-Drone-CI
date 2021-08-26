@@ -42,41 +42,34 @@ tg_post_msg "<b>===+++ Setting up Build Environment +++===</b>"
 echo " ===+++ Setting up Build Environment +++==="
 apt-get install openssh-server -y
 apt-get update --fix-missing
-apt-get install openssh-server -y
-mkdir ~/dotOS && cd ~/dotOS
 
 tg_post_msg "<b>===+++ Syncing Rom Sources +++===</b>"
 echo " ===+++ Syncing Rom Sources +++==="
-repo init --depth=1 -u $MANIFEST
-repo sync
-git clone --depth=1 $DT_LINK -b $BRANCH $DT_PATH
-git clone --depth=1 $VT_LINK -b $VT_BRANCH $VT_PATH
-git clone --depth=1 $KT_LINK -b $KT_BRANCH $KT_PATH
-git clone --depth=1 $TC_LINK -b $TC_BRANCH $TC_PATH
-git clone --depth=1 $TC32_LINK -b $TC32_BRANCH $TC32_PATH
-cd system/sepolicy
-git fetch "https://github.com/LineageOS/android_system_sepolicy" refs/changes/44/292244/3 && git cherry-pick FETCH_HEAD && cd ../..
+git clone --recurse-submodules https://github.com/erfanoabdi/ErfanGSIs.git
 
 tg_post_msg "<b>===+++ Starting Build Rom +++===</b>"
 echo " ===+++ Building Rom +++==="
-export ALLOW_MISSING_DEPENDENCIES=true
-export KBUILD_BUILD_USER=xiaomi
-export KBUILD_BUILD_HOST=Finix-server
-. build/envsetup.sh
-echo " source build/envsetup.sh done"
-lunch dot_${DEVICE}-userdebug || abort " lunch failed with exit status $?"
-echo " lunch dot_${DEVICE}-userdebug done"
-make bacon || abort " make failed with exit status $?"
-echo " make done"
+cd ErfanGSIs
+bash setup.sh
+./url2GSI.sh $ROM_URL $ROM_NAME
 
 # Upload zips & Rom.img (U can improvise lateron adding telegram support etc etc)
 tg_post_msg "<b>===+++ Uploading Rom +++===</b>"
 echo " ===+++ Uploading Rom +++==="
 
+
 # Push Rom to channel
-    cd out/target/product/$DEVICE
-    ZIP=$(echo dotOS-*.zip)
+    cd output
+    ZIP=$(echo $ZIP_NAME-GSI-Aonly.7z)
     curl -F document=@$ZIP "https://api.telegram.org/bot$TG_TOKEN/sendDocument" \
         -F chat_id="$TG_CHAT_ID" \
         -F "disable_web_page_preview=true" \
         -F "parse_mode=html" 
+     
+     ZIP=$(echo $ZIP_NAME-GSI-AB.7z)
+    curl -F document=@$ZIP "https://api.telegram.org/bot$TG_TOKEN/sendDocument" \
+        -F chat_id="$TG_CHAT_ID" \
+        -F "disable_web_page_preview=true" \
+        -F "parse_mode=html" 
+        
+cat ErfanGSIs/output/*-Aonly-*.txt

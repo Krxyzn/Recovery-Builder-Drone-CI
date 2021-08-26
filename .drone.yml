@@ -11,23 +11,10 @@ steps:
 - name: Start syncing && Compiling
   image: brock5555/recovery
   environment:
-       MANIFEST: git://github.com/DotOS/manifest.git -b dot11
-       DEVICE: rosy
-       BRANCH: dot
-       DT_LINK: https://github.com/arulebin/device_xiaomi_rosy
-       DT_PATH: device/xiaomi/rosy
-       VT_LINK: https://github.com/Pulkit077/vendor_xiaomi_rosy
-       VT_BRANCH: eleven
-       VT_PATH: vendor/xiaomi/rosy
-       KT_LINK: https://github.com/AnGgIt88/finix_kernel_xiaomi_rosy
-       KT_BRANCH: eleven
-       KT_PATH: kernel/xiaomi/rosy
-       TC_LINK: https://github.com/AnGgIt86/arm64-gcc
-       TC_BRANCH: gcc-master
-       TC_PATH: prebuilts/gcc/linux-x86/aarch64/aarch64-elf
-       TC32_LINK: https://github.com/AnGgIt86/gcc-arm
-       TC32_BRANCH: gcc-master
-       TC32_PATH: prebuilts/gcc/linux-x86/arm/arm-eabi
-       DRONE_TIMEOUT: 9h
+       ROM_URL: https://udomain.dl.sourceforge.net/project/xyzuan/xd_lavender/xd_rev1.3.redwhite.OBT-lavender-20210817-0139.zip
+       ROM_NAME: Generic
+       TZ: Asia/Jakarta
+       MIR: wet
+       ZIP_NAME: xdroid1.3
   commands:
   - bash build.sh
