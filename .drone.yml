@@ -11,10 +11,10 @@ steps:
 - name: Start syncing && Compiling
   image: brock5555/recovery
   environment:
-       ROM_URL: https://udomain.dl.sourceforge.net/project/xyzuan/xd_lavender/xd_rev1.3.redwhite.OBT-lavender-20210817-0139.zip
+       ROM_URL: https://liquidtelecom.dl.sourceforge.net/project/rayrzy/ResurrectionRemix/RROS-Q-8.7.2-20210824-rosy-Unofficial.zip
        ROM_NAME: Generic
        TZ: Asia/Jakarta
        MIR: wet
-       ZIP_NAME: xdroid1.3
+       ZIP_NAME: RROS-Q
   commands:
   - bash build.sh
