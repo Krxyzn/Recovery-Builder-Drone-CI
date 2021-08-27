@@ -1,15 +1,11 @@
 ---
 kind: pipeline
 type: docker
-name: linux-amd64
-
-platform:
-  arch: amd64
-  os: linux
+name: GSI-Building
 
 steps:
 - name: Start syncing && Compiling
-  image: brock5555/recovery
+  image: ubuntu:18.04
   environment:
        ROM_URL: https://liquidtelecom.dl.sourceforge.net/project/rayrzy/ResurrectionRemix/RROS-Q-8.7.2-20210824-rosy-Unofficial.zip
        ROM_NAME: Generic
