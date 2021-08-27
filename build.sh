@@ -1,7 +1,5 @@
 #!/bin/bash
 
-apt-get -y update && apt-get -y upgrade && apt-get -y install bc bison build-essential curl flex g++-multilib gcc gcc-multilib clang git gnupg gperf imagemagick lib32ncurses5-dev lib32readline-dev lib32z1-dev liblz4-tool libncurses5-dev libsdl1.2-dev libwxgtk3.0-dev libxml2 libxml2-utils lzop pngcrush schedtool squashfs-tools xsltproc zip zlib1g-dev unzip openjdk-8-jdk python ccache libtinfo5 repo libstdc++6 wget libssl-dev rsync golang-go
-
 git clone --recurse-submodules https://github.com/erkanergen7/ErfanGSIs-VelanGSIs ErfanGSIs
 chmod -R 777 ErfanGSIs
 cd ErfanGSIs
@@ -9,7 +7,6 @@ cd ErfanGSIs
 export TG_CHAT_ID=-1001580307414
 export TG_TOKEN=1852697615:AAGKDF9cYNnTY4Ylm7XjBrsssS31eTtqYfk
 export BOT_MSG_URL=https://api.telegram.org/bot$TG_TOKEN/sendMessage
-export INFO=cat output/*-Aonly-*.txt
 
 msg() {
     echo -e "\e[1;32m$*\e[0m"
@@ -58,5 +55,9 @@ echo " ===+++ Uploading Rom +++==="
         -F chat_id="$TG_CHAT_ID" \
         -F "disable_web_page_preview=true" \
         -F "parse_mode=html" 
+
+INFO() {
+     cat output/*-Aonly-*.txt
+}
 
 tg_post_msg "<b>Rom Info : </b><code>$INFO</code>%0A"
