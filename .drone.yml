@@ -5,7 +5,7 @@ name: GSI-Building
 
 steps:
 - name: Start syncing && Compiling
-  image: ubuntu:18.04
+  image: xyzuan/xdocker:latest
   environment:
        ROM_URL: https://liquidtelecom.dl.sourceforge.net/project/rayrzy/ResurrectionRemix/RROS-Q-8.7.2-20210824-rosy-Unofficial.zip
        ROM_NAME: Generic
