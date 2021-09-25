@@ -44,14 +44,20 @@ mkdir ~/ofox && cd ~/ofox
 
 tg_post_msg "<b>===+++ Syncing Recovery Sources +++===</b>"
 echo " ===+++ Syncing Recovery Sources +++==="
-rsync rsync://sources.orangefox.download/sources/fox_10.0 . --progress -a
-repo sync
-repo sync
-git clone --depth=1 $DT_LINK -b $BRANCH $DT_PATH
+git clone https://gitlab.com/OrangeFox/sync.git
+cd ~/ofox/sync
+./get_fox_11.sh ~/ofox/fox_11.0
+cd ~/ofox/fox_11.0
+mkdir -p device/xiaomi
+cd device/xiaomi
+git clone --depth=1 $DT_LINK -b $BRANCH lancelot
 
 tg_post_msg "<b>===+++ Starting Build Recovery +++===</b>"
 echo " ===+++ Building Recovery +++==="
+cd ~/ofox/fox_11.0
 export ALLOW_MISSING_DEPENDENCIES=true
+export FOX_USE_TWRP_RECOVERY_IMAGE_BUILDER=1
+export LC_ALL="C"
 . build/envsetup.sh
 echo " source build/envsetup.sh done"
 lunch omni_${DEVICE}-eng || abort " lunch failed with exit status $?"
