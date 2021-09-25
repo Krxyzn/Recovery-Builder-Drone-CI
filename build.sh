@@ -44,7 +44,7 @@ mkdir ~/ofox && cd ~/ofox
 
 tg_post_msg "<b>===+++ Syncing Recovery Sources +++===</b>"
 echo " ===+++ Syncing Recovery Sources +++==="
-repo init --depth=1 -u $MANIFEST
+rsync rsync://sources.orangefox.download/sources/fox_10.0 . --progress -a
 repo sync
 repo sync
 git clone --depth=1 $DT_LINK -b $BRANCH $DT_PATH
