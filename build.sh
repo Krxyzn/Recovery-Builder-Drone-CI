@@ -46,15 +46,15 @@ tg_post_msg "<b>===+++ Syncing Recovery Sources +++===</b>"
 echo " ===+++ Syncing Recovery Sources +++==="
 git clone https://gitlab.com/OrangeFox/sync.git
 cd ~/ofox/sync
-./get_fox_11.sh ~/ofox/fox_11.0
-cd ~/ofox/fox_11.0
+./get_fox_10.sh ~/ofox/fox_10.0
+cd ~/ofox/fox_10.0
 mkdir -p device/xiaomi
 cd device/xiaomi
 git clone --depth=1 $DT_LINK -b $BRANCH lancelot
 
 tg_post_msg "<b>===+++ Starting Build Recovery +++===</b>"
 echo " ===+++ Building Recovery +++==="
-cd ~/ofox/fox_11.0
+cd ~/ofox/fox_10.0
 export ALLOW_MISSING_DEPENDENCIES=true
 export FOX_USE_TWRP_RECOVERY_IMAGE_BUILDER=1
 export LC_ALL="C"
