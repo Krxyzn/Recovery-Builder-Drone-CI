@@ -55,9 +55,6 @@ git clone --depth=1 $DT_LINK -b $BRANCH lancelot
 tg_post_msg "<b>===+++ Starting Build Recovery +++===</b>"
 echo " ===+++ Building Recovery +++==="
 cd ~/ofox/fox_10.0
-export ALLOW_MISSING_DEPENDENCIES=true
-export FOX_USE_TWRP_RECOVERY_IMAGE_BUILDER=1
-export LC_ALL="C"
 . build/envsetup.sh
 echo " source build/envsetup.sh done"
 lunch omni_${DEVICE}-eng || abort " lunch failed with exit status $?"
@@ -71,4 +68,8 @@ echo " ===+++ Uploading Recovery +++==="
 
 # Push Recovery to channel
     cd out/target/product/$DEVICE
-    curl --upload-file out/target/product/lancelot/OrangeFox-unofficial-lancelot.img https://transfer.sh/OrangeFox-unofficial-lancelot.img
+    ZIP=$(echo *$DEVICE.zip)
+    curl -F document=@$ZIP "https://api.telegram.org/bot$TG_TOKEN/sendDocument" \
+        -F chat_id="$TG_CHAT_ID" \
+        -F "disable_web_page_preview=true" \
+        -F "parse_mode=html" 
