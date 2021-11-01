@@ -50,7 +50,7 @@ cd ~/ofox/sync
 cd ~/ofox/fox_10.0
 mkdir -p device/xiaomi
 cd device/xiaomi
-git clone https://github.com/khaeruirgi/recovery_lancelot lancelot
+git clone https://gitlab.com/khaeruirgi/omni_devices_xiaomi_lancelot.git lancelot
 
 tg_post_msg "<b>===+++ Starting Build Recovery +++===</b>"
 echo " ===+++ Building Recovery +++==="
