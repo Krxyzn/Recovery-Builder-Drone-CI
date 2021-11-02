@@ -1,7 +1,7 @@
 #!/bin/bash
 
-export TG_CHAT_ID=-1001580307414
-export TG_TOKEN=1852697615:AAGKDF9cYNnTY4Ylm7XjBrsssS31eTtqYfk
+export TG_CHAT_ID=-1001518479647
+export TG_TOKEN=1851416641:AAFFCb4y-oB1i9hjgtWYYQEeHjHCf2gh17I
 
 # Just a basic script U can improvise lateron asper ur need xD 
 
@@ -43,31 +43,21 @@ echo " ===+++ Setting up Build Environment +++==="
 apt-get install openssh-server -y
 apt-get update --fix-missing
 apt-get install openssh-server -y
-mkdir ~/dotOS && cd ~/dotOS
+mkdir ~/lineage && cd ~/lineage
 
 tg_post_msg "<b>===+++ Syncing Rom Sources +++===</b>"
 echo " ===+++ Syncing Rom Sources +++==="
-repo init --depth=1 -u $MANIFEST
-repo sync
-git clone --depth=1 $DT_LINK -b $BRANCH $DT_PATH
-git clone --depth=1 $VT_LINK -b $VT_BRANCH $VT_PATH
-git clone --depth=1 $KT_LINK -b $KT_BRANCH $KT_PATH
-git clone --depth=1 $TC_LINK -b $TC_BRANCH $TC_PATH
-git clone --depth=1 $TC32_LINK -b $TC32_BRANCH $TC32_PATH
-cd system/sepolicy
-git fetch "https://github.com/LineageOS/android_system_sepolicy" refs/changes/44/292244/3 && git cherry-pick FETCH_HEAD && cd ../..
+repo init -u git://github.com/LineageOS/android.git -b lineage-18.1
+repo sync --force-sync --no-clone-bundle -j31
+git clone https://github.com/Redmi-MT6768/android_device_xiaomi_lava -b lineage-18.1 device/xiaomi/lava && git clone https://github.com/Redmi-MT6768/android_vendor_xiaomi_lava -b eleven vendor/xiaomi/lava && git clone https://github.com/Redmi-MT6768/android_kernel_xiaomi_mt6768 -b eleven kernel/xiaomi/mt6768 && git clone https://github.com/PixelExperience/device_mediatek_sepolicy_vndr -b eleven device/mediatek/sepolicy_vndr && git clone https://github.com/Redmi-MT6768/android_device_xiaomi_mt6768-common -b eleven device/xiaomi/mt6768-common
 
 tg_post_msg "<b>===+++ Starting Build Rom +++===</b>"
 echo " ===+++ Building Rom +++==="
 export ALLOW_MISSING_DEPENDENCIES=true
-export KBUILD_BUILD_USER=xiaomi
-export KBUILD_BUILD_HOST=Finix-server
-. build/envsetup.sh
-echo " source build/envsetup.sh done"
-lunch dot_${DEVICE}-userdebug || abort " lunch failed with exit status $?"
-echo " lunch dot_${DEVICE}-userdebug done"
-make bacon || abort " make failed with exit status $?"
-echo " make done"
+export KBUILD_BUILD_USER=kucingabu
+export KBUILD_BUILD_HOST=serverlelet
+lunch lineage_lava-userdebug
+mka bacon
 
 # Upload zips & Rom.img (U can improvise lateron adding telegram support etc etc)
 tg_post_msg "<b>===+++ Uploading Rom +++===</b>"
