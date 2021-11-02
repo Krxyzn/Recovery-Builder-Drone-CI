@@ -48,7 +48,7 @@ mkdir ~/lineage && cd ~/lineage
 tg_post_msg "<b>===+++ Syncing Rom Sources +++===</b>"
 echo " ===+++ Syncing Rom Sources +++==="
 repo init -u git://github.com/LineageOS/android.git -b lineage-18.1
-repo sync --force-sync --no-clone-bundle -j31
+repo sync
 git clone https://github.com/Redmi-MT6768/android_device_xiaomi_lava -b lineage-18.1 device/xiaomi/lava && git clone https://github.com/Redmi-MT6768/android_vendor_xiaomi_lava -b eleven vendor/xiaomi/lava && git clone https://github.com/Redmi-MT6768/android_kernel_xiaomi_mt6768 -b eleven kernel/xiaomi/mt6768 && git clone https://github.com/PixelExperience/device_mediatek_sepolicy_vndr -b eleven device/mediatek/sepolicy_vndr && git clone https://github.com/Redmi-MT6768/android_device_xiaomi_mt6768-common -b eleven device/xiaomi/mt6768-common
 
 tg_post_msg "<b>===+++ Starting Build Rom +++===</b>"
@@ -56,6 +56,7 @@ echo " ===+++ Building Rom +++==="
 export ALLOW_MISSING_DEPENDENCIES=true
 export KBUILD_BUILD_USER=kucingabu
 export KBUILD_BUILD_HOST=serverlelet
+. build/envsetup.sh
 lunch lineage_lava-userdebug
 mka bacon
 
