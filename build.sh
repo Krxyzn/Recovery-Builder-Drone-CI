@@ -64,8 +64,8 @@ tg_post_msg "<b>===+++ Uploading Rom +++===</b>"
 echo " ===+++ Uploading Rom +++==="
 
 # Push Rom to channel
-    cd out/target/product/$DEVICE
-    ZIP=$(echo dotOS-*.zip)
+    cd out/target/product/lava
+    ZIP=$(echo lineage-*.zip)
     curl -F document=@$ZIP "https://api.telegram.org/bot$TG_TOKEN/sendDocument" \
         -F chat_id="$TG_CHAT_ID" \
         -F "disable_web_page_preview=true" \
