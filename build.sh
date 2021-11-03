@@ -44,23 +44,22 @@ mkdir ~/ofox && cd ~/ofox
 
 tg_post_msg "<b>===+++ Syncing Recovery Sources +++===</b>"
 echo " ===+++ Syncing Recovery Sources +++==="
-git clone https://gitlab.com/OrangeFox/sync.git
-cd ~/ofox/sync
-./get_fox_10.sh ~/ofox/fox_10.0
-cd ~/ofox/fox_10.0
+mkdir ofox && cd ofox
+repo init -u git://github.com/PitchBlackRecoveryProject/manifest_pb.git -b android-10.0
+repo sync
 mkdir -p device/xiaomi
 cd device/xiaomi
 git clone https://gitlab.com/khaeruirgi/omni_devices_xiaomi_lancelot.git lancelot
 
 tg_post_msg "<b>===+++ Starting Build Recovery +++===</b>"
 echo " ===+++ Building Recovery +++==="
-cd ~/ofox/fox_10.0
+cd ~/ofox
 export ALLOW_MISSING_DEPENDENCIES=true
 export FOX_USE_TWRP_RECOVERY_IMAGE_BUILDER=1
 export LC_ALL="C"
 . build/envsetup.sh
 echo " source build/envsetup.sh done"
-lunch omni_${DEVICE}-eng || abort " lunch failed with exit status $?"
+lunch omni_lancelot-eng || abort " lunch failed with exit status $?"
 echo " lunch omni_${DEVICE}-eng done"
 mka recoveryimage || abort " mka failed with exit status $?"
 echo " mka recoveryimage done"
