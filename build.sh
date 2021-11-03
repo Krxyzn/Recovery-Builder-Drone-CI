@@ -47,8 +47,6 @@ echo " ===+++ Syncing Recovery Sources +++==="
 mkdir ofox && cd ofox
 repo init -u git://github.com/PitchBlackRecoveryProject/manifest_pb.git -b android-10.0
 repo sync
-mkdir -p device/xiaomi
-cd device/xiaomi
 git clone https://gitlab.com/khaeruirgi/omni_devices_xiaomi_lancelot.git lancelot
 
 tg_post_msg "<b>===+++ Starting Build Recovery +++===</b>"
