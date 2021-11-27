@@ -44,7 +44,7 @@ mkdir ~/twrp && cd ~/twrp
 
 tg_post_msg "<b>===+++ Syncing Recovery Sources +++===</b>"
 echo " ===+++ Syncing Recovery Sources +++==="
-repo init -u --depth=1 git://github.com/minimal-manifest-twrp/platform_manifest_twrp_aosp.git -b twrp-11
+repo init --depth=1 -u git://github.com/minimal-manifest-twrp/platform_manifest_twrp_aosp.git -b twrp-11
 repo sync
 mkdir -p devices/xiaomi
 cd devices/xiaomi
