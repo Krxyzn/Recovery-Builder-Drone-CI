@@ -44,10 +44,9 @@ mkdir ~/ofox && cd ~/ofox
 
 tg_post_msg "<b>===+++ Syncing Recovery Sources +++===</b>"
 echo " ===+++ Syncing Recovery Sources +++==="
-mkdir ofox && cd ofox
-repo init -u git://github.com/PitchBlackRecoveryProject/manifest_pb.git -b android-10.0
-repo sync
-git clone https://gitlab.com/khaeruirgi/omni_devices_xiaomi_lancelot.git lancelot
+git clone https://github.com/TeamWin/android_bootable_recovery ofox
+cd ofox
+git clone https://gitlab.com/khaeruirgi/omni_devices_xiaomi_lancelot.git devices/xiaomi/lancelot
 
 tg_post_msg "<b>===+++ Starting Build Recovery +++===</b>"
 echo " ===+++ Building Recovery +++==="
