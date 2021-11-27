@@ -40,23 +40,27 @@ echo " ===+++ Setting up Build Environment +++==="
 apt-get install openssh-server -y
 apt-get update --fix-missing
 apt-get install openssh-server -y
-cd ~
-mkdir ~/ofox
+mkdir ~/ofox && cd ~/ofox
 
 tg_post_msg "<b>===+++ Syncing Recovery Sources +++===</b>"
 echo " ===+++ Syncing Recovery Sources +++==="
-git clone https://github.com/TeamWin/android_bootable_recovery ofox
-cd ofox
-git clone https://gitlab.com/khaeruirgi/omni_devices_xiaomi_lancelot.git devices/xiaomi/lancelot
+git clone https://gitlab.com/OrangeFox/sync.git
+cd ~/ofox/sync
+./get_fox_11.sh ~/ofox/fox_11.0
+cd ~/ofox/fox_11.0
+mkdir -p device/xiaomi
+cd device/xiaomi
+git clone https://gitlab.com/khaeruirgi/omni_devices_xiaomi_lancelot.git lancelot
 
 tg_post_msg "<b>===+++ Starting Build Recovery +++===</b>"
 echo " ===+++ Building Recovery +++==="
+cd ~/ofox/fox_11.0
 export ALLOW_MISSING_DEPENDENCIES=true
 export FOX_USE_TWRP_RECOVERY_IMAGE_BUILDER=1
 export LC_ALL="C"
 . build/envsetup.sh
 echo " source build/envsetup.sh done"
-lunch omni_lancelot-eng || abort " lunch failed with exit status $?"
+lunch omni_${DEVICE}-eng || abort " lunch failed with exit status $?"
 echo " lunch omni_${DEVICE}-eng done"
 mka recoveryimage || abort " mka failed with exit status $?"
 echo " mka recoveryimage done"
