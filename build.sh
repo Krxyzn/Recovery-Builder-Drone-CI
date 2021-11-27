@@ -40,7 +40,8 @@ echo " ===+++ Setting up Build Environment +++==="
 apt-get install openssh-server -y
 apt-get update --fix-missing
 apt-get install openssh-server -y
-mkdir ~/ofox && cd ~/ofox
+cd ~
+mkdir ~/ofox
 
 tg_post_msg "<b>===+++ Syncing Recovery Sources +++===</b>"
 echo " ===+++ Syncing Recovery Sources +++==="
@@ -50,7 +51,6 @@ git clone https://gitlab.com/khaeruirgi/omni_devices_xiaomi_lancelot.git devices
 
 tg_post_msg "<b>===+++ Starting Build Recovery +++===</b>"
 echo " ===+++ Building Recovery +++==="
-cd ~/ofox
 export ALLOW_MISSING_DEPENDENCIES=true
 export FOX_USE_TWRP_RECOVERY_IMAGE_BUILDER=1
 export LC_ALL="C"
