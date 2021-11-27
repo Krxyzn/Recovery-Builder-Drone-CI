@@ -40,21 +40,19 @@ echo " ===+++ Setting up Build Environment +++==="
 apt-get install openssh-server -y
 apt-get update --fix-missing
 apt-get install openssh-server -y
-mkdir ~/ofox && cd ~/ofox
+mkdir ~/twrp && cd ~/twrp
 
 tg_post_msg "<b>===+++ Syncing Recovery Sources +++===</b>"
 echo " ===+++ Syncing Recovery Sources +++==="
-git clone https://gitlab.com/OrangeFox/sync.git
-cd ~/ofox/sync
-./get_fox_11.sh ~/ofox/fox_11.0
-cd ~/ofox/fox_11.0
-mkdir -p device/xiaomi
-cd device/xiaomi
+repo init -u --depth=1 git://github.com/minimal-manifest-twrp/platform_manifest_twrp_aosp.git -b twrp-11
+repo sync
+mkdir -p devices/xiaomi
+cd devices/xiaomi
 git clone https://gitlab.com/khaeruirgi/omni_devices_xiaomi_lancelot.git lancelot
 
 tg_post_msg "<b>===+++ Starting Build Recovery +++===</b>"
 echo " ===+++ Building Recovery +++==="
-cd ~/ofox/fox_11.0
+cd ~/twrp
 export ALLOW_MISSING_DEPENDENCIES=true
 export FOX_USE_TWRP_RECOVERY_IMAGE_BUILDER=1
 export LC_ALL="C"
